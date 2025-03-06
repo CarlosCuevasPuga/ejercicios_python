@@ -23,3 +23,13 @@ class Videojuego:
    def apto_menores(self) -> bool:
        """Devuelve True si el juego es apto para menores de edad (PEGI < 18), False en caso contrario."""
        return self.PEGI < 18
+  
+   def __str__(self):
+       return (f"Nombre: {self.nombre}\n"
+               f"Géneros: {', '.join(self.generos)}\n"
+               f"Fecha de Salida: {self.fecha_salida}\n"
+               f"Puntuación: {self.puntuacion}/10\n"
+               f"PEGI: {self.PEGI}\n"
+               f"Precio Base: {self.precio_base}€\n"
+               f"Peso: {self.peso} GB\n"
+               f"Apto para menores: {'Sí' if self.apto_menores() else 'No'}")
