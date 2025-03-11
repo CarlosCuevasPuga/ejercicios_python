@@ -103,9 +103,5 @@ juegos = [
 
 ]
 
-
-juegos_para_menores = [juego for juego in juegos if juego.apto_menores() and juego.puntuacion >= 9 and juego.peso < 50]
-
-print("Los juegos que cumplen el juego son:")
-for juego in juegos_para_menores:
-    print(juego.nombre)
+for juego in juegos:
+    print(f"{juego.nombre}: {juego.precio_final(0.21,0)}€")
