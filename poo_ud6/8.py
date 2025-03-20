@@ -60,5 +60,16 @@ for planeta in planetas_sistema_solar:
     if planeta.nombre == "Tierra":
         densidad_tierra = planeta.get_densidad()
 
-for planeta in planetas_trappist:
+for iplaneta in planetas_trappist:
     pass
+
+# planetas sin lunas de ambos sistemas
+planetas_sistema_solar_luna = [planeta.lunas for planeta in planetas_sistema_solar]
+planetas_sistema_solar_sin_luna = []
+
+for i, planeta in enumerate(planetas_sistema_solar):
+    if planeta != planetas_sistema_solar_luna[i]:
+        planetas_sistema_solar_sin_luna.append(planeta)
+
+for planeta in planetas_sistema_solar_sin_luna:
+    print(planeta)
