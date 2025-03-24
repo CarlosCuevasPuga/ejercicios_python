@@ -1,14 +1,14 @@
 from Videojuego import Videojuego
 from Usuario import Usuario
-from datos import get_juegos
 from datos import get_usuarios
 import funcs
 
 lista_nombres_usuarios = [usuario.nombre for usuario in get_usuarios()]
 lista_contraseñas_usuarios = [usuario.contra for usuario in get_usuarios()]
 lista_juegos_usuario = []
+lista_carrito = []
 login_completado = False
-saldo_ingresado = 0
+saldo_usuario = 0
 
 nombre_usuario = input("Login: ")
 while True:
@@ -16,30 +16,59 @@ while True:
         contraseña = input("contraseña: ")
         if contraseña in lista_contraseñas_usuarios:
             login_completado = True
+            lista_videojuegos = funcs.videojuegos_segun_edad(nombre_usuario)
             while login_completado:
-                saldo_usuario = funcs.saldo_usuario(nombre_usuario)
-                saldo_usuario += saldo_ingresado
-                lista_videojuegos = funcs.videojuegos_segun_edad(nombre_usuario)
                 for i, juego in enumerate(lista_videojuegos):
                     print(f"[{i+1}]. {juego.nombre}")    
                 print("\n----------------------\n")
-                print(f"Actualmente tienes {saldo_usuario}")
+                print(f"Actualmente tienes {saldo_usuario}€")
                 print("\n----------------------\n")
                 print("[V]er mis juegos")
                 print("[I]ngresar dinero")
                 print("Ir al [c]arrito")
                 print("[S]alir")
                 opcion = input("¿Qué quieres hacer?").lower()
-                if opcion >= 1 and opcion <= len(lista_juegos_usuario):
-                    juego_seleccionado = funcs.juego_seleccionado(nombre_usuario, opcion)
-                    print(juego_seleccionado)
-                elif opcion == "v":
-                    print("Tienes los siguientes juegos:")
-                    for juego in lista_juegos_usuario:
-                        print(juego)
+                if opcion == "v":
+                    if len(lista_juegos_usuario) <= 0:
+                        print("No tienes ningun juego")
+                    else:
+                        print("Tienes los siguientes juegos:")
+                        for juego in lista_juegos_usuario:
+                            print(juego)
                 elif opcion == "i":
-                    saldo_ingresado = int(input("Cantidad a ingresar: "))
-                    print(f"Enhorabuena has ingresado {saldo_ingresado} €")
+                    saldo_usuario = float(input("Cantidad a ingresar: "))
+                    print(f"Enhorabuena has ingresado {saldo_usuario} €")
+                    input()
+                elif opcion == "c":
+                    print("Tienes los siguientes juegos en el carrito:")
+                    if len(lista_carrito) <= 0:
+                        print("No hay juegos en el carrito")
+                        input()
+                    else:
+                        precio_total = 0
+                        for juego in lista_carrito:
+                            print(f"{juego.nombre} -- precio: {juego.precio_base}")
+                            precio_total += juego.precio_base
+                        print(f"el precio total es: {precio_total}€")
+                        print("[P]agar")
+                        print("[V]olver")
+                        opcion_carrito = input().lower()
+                        if opcion_carrito == "p" and saldo_usuario >= precio_total:
+                            for juego in lista_carrito:
+                                lista_juegos_usuario.append(juego)
+                            print("Pago realizado con exito")
+                            saldo_usuario -= precio_total
+                            input()
+                        elif opcion_carrito == "p" and saldo_usuario < precio_total:
+                            print("Saldo insuficiente")
+                            input()
+                else:
+                    opcion = int(opcion)
+                    print(lista_videojuegos[opcion-1])
+                    juego_elegido = input("¿Quieres añadir el juego al carrito (S/N)? ").lower()
+                    if juego_elegido == "s":
+                        lista_carrito.append(lista_videojuegos[opcion-1])
+                        lista_videojuegos.remove(lista_videojuegos[opcion-1])
         else:
             while not contraseña in lista_contraseñas_usuarios:
                 contraseña = input("contraseña incorrecta, inserte de nuevo la contrasela: ")
