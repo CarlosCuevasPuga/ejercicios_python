@@ -15,5 +15,6 @@ def saldo_usuario(nombre) -> float:
         if usuario.nombre == nombre:
             return usuario.saldo
 
-def saldo_ingresado(saldo_usuario: float, saldo_ingresado: float) -> float:
-    return saldo_ingresado + saldo_usuario
+def convertir_a_entero(string: str) -> int:
+    entero = int(string)
+    return entero
