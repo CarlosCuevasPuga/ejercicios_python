@@ -48,7 +48,7 @@ class Videojuego:
         if isinstance(other, Videojuego):
             return self.puntuacion <= other.puntuacion
         else:
-            False
+            return False
 
     def es_del_genero(self, genero: str) -> bool:
         return genero in self.generos

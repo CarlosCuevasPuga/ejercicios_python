@@ -17,10 +17,12 @@ class ColeccionVideojuegos:
         no_repetidos = []
         repetidos = []
         for juego in self.videojuegos:
-            if juego.nombre not in no_repetidos:
-                no_repetidos.append(juego.nombre)
+            if [juego.nombre, juego.fecha_salida] not in no_repetidos:
+                no_repetidos.append([juego.nombre, juego.fecha_salida])
             else:
-                repetidos.append(juego.nombre)
+                if juego not in repetidos:
+                    repetidos.append(juego)
+                    
         return repetidos
 
     def mostrar_juegos_repetidos(self):
