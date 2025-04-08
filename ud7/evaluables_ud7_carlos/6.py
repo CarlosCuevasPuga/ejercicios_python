@@ -15,9 +15,9 @@ planetas = [
 for planeta in planetas:
     print(f"\n{planeta}\n")
 
-planetas_rocosos_sin_luna= [planeta for planeta in planetas if planeta.rocoso == True and planeta.num_lunas == 0]
-
 print("\n--------------------------------\n")
+
+planetas_rocosos_sin_luna= [planeta for planeta in planetas if planeta.rocoso == True and planeta.num_lunas == 0]
 
 for planeta in planetas_rocosos_sin_luna:
     print(f"\n{planeta}\n")
