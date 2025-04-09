@@ -1,7 +1,7 @@
 from Consolas import Consola
 from datetime import datetime
 
-class SobreMesa(Consola):
+class ConsolaSobreMesa(Consola):
     def __init__(self, nombre: str, desarrollador: str, fecha_salida: datetime, colores: list, edicion_limitada: bool, num_mandos: int):
         super().__init__(nombre, desarrollador, fecha_salida)
 
@@ -12,7 +12,7 @@ class SobreMesa(Consola):
     def __str__(self) -> str:
         return super().__str__() + (
             f"Colores: {self.colores}, "
-            f"Edicion limitada: {self.edicion_limitada}"
+            f"Edicion limitada: {self.edicion_limitada_str()}"
         )
 
     def edicion_limitada_str(self) -> str:
