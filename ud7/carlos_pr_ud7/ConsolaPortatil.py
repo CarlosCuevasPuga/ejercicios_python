@@ -2,7 +2,7 @@ from Consolas import Consola
 from datetime import datetime
 
 class ConsolaPortatil(Consola):
-    def __init__(self, nombre: str, desarrollador: str, fecha_salida: datetime, colores: list, edicion_limitada: bool, autonomia: int):
+    def __init__(self, nombre: str, desarrollador: str, fecha_salida: datetime, colores: list, edicion_limitada: bool, almacenamiento: int, autonomia: int):
         super().__init__(nombre, desarrollador, fecha_salida)
 
         self.colores = colores
@@ -12,6 +12,7 @@ class ConsolaPortatil(Consola):
         else:
             self.edicion_limitada = edicion_limitada
 
+        self.almacenamiento = almacenamiento
         self.autonomia = autonomia
 
     def __str__(self) -> str:
