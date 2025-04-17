@@ -1,7 +1,7 @@
 from datetime import datetime
 
 class Consola:
-    def __init__(self, nombre: str, desarrollador: str, fecha_salida: datetime):
+    def __init__(self, nombre: str, desarrollador: list, fecha_salida: datetime):
         self.nombre = nombre
         self.desarrollador = desarrollador
         
@@ -16,6 +16,12 @@ class Consola:
             f"Desarrolladores: {self.desarrollador}, "
             f"Fecha de Salida: {self.fecha_salida}"
         )
+
+    def mas_de_1_desarrollador(self):
+        if len(self.desarrollador) > 1:
+            return True
+        else:
+            return False
 
     def __eq__(self, other) -> bool:
         if isinstance(other, Consola):

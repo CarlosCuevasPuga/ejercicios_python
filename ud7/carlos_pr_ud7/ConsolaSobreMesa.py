@@ -1,13 +1,23 @@
-from Consolas import Consola
+from Consola import Consola
 from datetime import datetime
 
 class ConsolaSobreMesa(Consola):
-    def __init__(self, nombre: str, desarrollador: str, fecha_salida: datetime, colores: list, edicion_limitada: bool, almacenamiento: int):
+    def __init__(self, nombre: str, desarrollador: list, fecha_salida: datetime, colores: list, edicion_limitada: bool, almacenamiento: int, num_usb: int):
         super().__init__(nombre, desarrollador, fecha_salida)
 
         self.colores = colores
-        self.edicion_limitada = edicion_limitada
-        self.almacenamiento = almacenamiento
+        
+        if edicion_limitada == True or edicion_limitada == False:
+            self.edicion_limitada = edicion_limitada
+        else:
+            edicion_limitada = False
+        
+        if almacenamiento > 0:
+            self.almacenamiento = almacenamiento
+        else:
+            self.almacenamiento = 100
+
+        self.num_usb = num_usb
 
     def __str__(self) -> str:
         return super().__str__() + (
