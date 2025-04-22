@@ -32,10 +32,14 @@ class Tienda:
 
     def mostrar(self, pos) -> object:
         pos = abs(pos)
-        for i, consola in enumerate(self.coleccion_consolas):
-            i += 1
-            if i == pos:
-                return consola
+        consola_a_mostrar = self.coleccion_consolas[pos+1]
+        for atributos in consola_a_mostrar:
+            print(atributos)
+
+    def consola_seleccionada(self, pos) -> object:
+        pos = abs(pos)
+        consola_seleccionada = self.coleccion_consolas[pos-1]
+        return consola_seleccionada
 
     def ordenar_por_fecha(self) -> list:
         fechas = [consola.fecha_salida for consola in self.coleccion_consolas]

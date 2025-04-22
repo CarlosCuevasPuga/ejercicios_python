@@ -1,11 +1,11 @@
 from datetime import datetime
 from ConsolaSobreMesa import ConsolaSobreMesa
 from ConsolaPortatil import ConsolaPortatil
-from ColeccionConsolas import Tienda
+from Tienda import Tienda
 
 consolas_sobremesa = [
     # Consolas de sobremesa
-    ConsolaSobreMesa("PlayStation 5", ["Sony"], datetime(2020, 11, 12), ["Blanco", "Negro"], False, 825, 4),
+    ConsolaSobreMesa("PlayStation 5", ["Sony"], datetime(2020, 11, 12), ["Blanco", "Negro"], True, 825, 4),
     ConsolaSobreMesa("Xbox Series X", ["Microsoft"], datetime(2020, 11, 10), ["Negro"], False, 1000, 3),
     ConsolaSobreMesa("PlayBox Fusion", ["Sony", "Microsoft"], datetime(2025, 3, 1), ["Negro", "Plata"], False, 2000, 4),
     ConsolaSobreMesa("NintenBox", ["Nintendo", "Microsoft"], datetime(2024, 11, 20), ["Rojo", "Negro"], True, 1000, 3),
@@ -41,14 +41,40 @@ while True:
         break
 
     elif opcion_menu == "A":
-        pass
+        opcion_tipo_consola = int(input("¿La consola nueva es de Sobremesa (1) o Portatil (2)? "))
+        if opcion_tipo_consola == 1:
+            nuevo_nombre = input("Inserta el nuevo nombre: ")
+            nuevo_desarrollador = list(input("Inserta su desarrollador/es (si tiene mas de 1 separalos por coma): "))
+            
+            try:
+                nuevo_fecha = datetime(input("Inserta su fecha de lanzamiento (ejemplo: 2022, 2, 25): "))
+            except Exception as error:
+                print(f"Ha ocurrido un error: {error}")
+
+            nuevo_colores = list(input("Inserta los colores de la consola (si tiene mas de 1 separalos por comas): "))
+            nuevo_edicion_limitada = input("Inserta si la consola es exclusiva (Si o No):" )
+            nuevo_almacenamiento = int(input("Inserta la cantidad de almacenamiento que tiene (MB): "))
+            nuevo_num_usb = int(input("Inserta su número de USB: "))
+        elif opcion_tipo_consola == 2:
+            nuevo_nombre = input("Inserta el nuevo nombre: ")
+            nuevo_desarrollador = list(input("Inserta su desarrollador/es (si tiene mas de 1 separalos por coma): "))
+            
+            try:
+                nuevo_fecha = datetime(input("Inserta su fecha de lanzamiento (ejemplo: 2022, 2, 25): "))
+            except Exception as error:
+                print(f"Ha ocurrido un error: {error}")
+
+            nuevo_colores = list(input("Inserta los colores de la consola (si tiene mas de 1 separalos por comas): "))
+            nuevo_exclusivo = input("Inserta si la consola es exclusiva (Si o No):" )
+            nuevo_almacenamiento = int(input("Inserta la cantidad de almacenamiento que tiene (MB): "))
+            nuevo_autonomia = int(input("Inserta su autonomia (horas): "))
 
     elif opcion_menu == "O":
         print("\n## Consolas ordenadas por fecha de salida:")
         coleccion_ordenada_fecha = coleccion_consolas.ordenar_por_fecha()
-        for consola in coleccion_ordenada_fecha:
+        for i, consola in enumerate(coleccion_ordenada_fecha):
             fecha = consola.fecha_salida.strftime("%d/%m/%Y")
-            print(f"{consola.nombre} -- {fecha}")
+            print(f"[{i+1}] {consola.nombre} -- {fecha}")
         input()
 
     else:
@@ -60,8 +86,8 @@ while True:
             input()
 
         elif num_consola < 0:
-            juego_a_borrar = coleccion_consolas.mostrar(num_consola)
-            print(f"Va a proceder a borrar la consola: {juego_a_borrar.nombre} con {juego_a_borrar.almacenamiento} MB de memoria")
+            consola = coleccion_consolas.consola_seleccionada(num_consola)
+            print(f"Va a proceder a borrar la consola: {consola.nombre} con {consola.almacenamiento} MB de memoria")
             opcion_borrar = input("¿Está Seguro (S/N)?").upper()
 
             if opcion_borrar == "S":
