@@ -16,7 +16,7 @@ class Tienda:
     def __str__(self) -> str:
         coleccion_str = "\nCONSOLAS DISPONIBLES:\n\n"
         for i, consola in enumerate(self.coleccion_consolas):
-            coleccion_str += f"[{i+1}] {consola.nombre} - Almacenamiento: {consola.almacenamiento}MB - Edicion Limitada: {consola.edicion_limitada_str()}\n"
+            coleccion_str += f"[{i+1}] {consola.nombre} - Desarrollador/es: {consola.desarrollador} - Almacenamiento: {consola.almacenamiento}MB - Edicion Limitada: {consola.edicion_limitada_str()}\n"
 
         return coleccion_str
 
@@ -36,6 +36,14 @@ class Tienda:
             i += 1
             if i == pos:
                 return consola
-    def ordenar_por_fecha(self):
-        consolas_por_fecha = [consola for consola in self.coleccion_consolas]
-        return self.coleccion_consolas
+
+    def ordenar_por_fecha(self) -> list:
+        fechas = [consola.fecha_salida for consola in self.coleccion_consolas]
+        fechas.sort()
+        fechas_ordenadas = []
+        for fecha in fechas:
+            for consola in self.coleccion_consolas:
+                if consola.fecha_salida == fecha:
+                    fechas_ordenadas.append(consola)
+
+        return fechas_ordenadas

@@ -39,29 +39,35 @@ while True:
     opcion_menu = input("").upper()
     if opcion_menu == "S":
         break
+
     elif opcion_menu == "A":
         pass
+
     elif opcion_menu == "O":
+        print("\n## Consolas ordenadas por fecha de salida:")
         coleccion_ordenada_fecha = coleccion_consolas.ordenar_por_fecha()
         for consola in coleccion_ordenada_fecha:
             fecha = consola.fecha_salida.strftime("%d/%m/%Y")
             print(f"{consola.nombre} -- {fecha}")
         input()
-    else:
-        opcion_ver_consola = int(opcion_menu)
-        if opcion_ver_consola >= 0:
-            consola_a_mostrar = coleccion_consolas.mostrar(opcion_ver_consola)
-            
-            input()
-        elif opcion_ver_consola < 0:
 
-            juego_a_borrar = coleccion_consolas.mostrar(opcion_ver_consola)
+    else:
+        num_consola = int(opcion_menu)
+        
+        if num_consola > 0:
+            consola_a_mostrar = coleccion_consolas.mostrar(num_consola)
+            print(consola_a_mostrar)
+            input()
+
+        elif num_consola < 0:
+            juego_a_borrar = coleccion_consolas.mostrar(num_consola)
             print(f"Va a proceder a borrar la consola: {juego_a_borrar.nombre} con {juego_a_borrar.almacenamiento} MB de memoria")
             opcion_borrar = input("¿Está Seguro (S/N)?").upper()
 
             if opcion_borrar == "S":
-                coleccion_consolas.borrar(opcion_ver_consola)
-                print("Consola Eliminado")
+                coleccion_consolas.borrar(num_consola)
+                print("Consola Eliminada")
+
             elif opcion_borrar == "N":
                 print("Eliminacion Cancelada")
             input()

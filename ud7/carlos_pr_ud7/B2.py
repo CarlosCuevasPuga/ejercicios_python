@@ -33,3 +33,10 @@ print(consolas_sobremesa[0] >= consolas_sobremesa[2])
 print(consolas_sobremesa[0] >= consolas_sobremesa[3])
 print(consolas_sobremesa[0] <= consolas_sobremesa[2])
 print(consolas_sobremesa[0] <= consolas_sobremesa[3])
+
+print("-" * 140)
+
+print("consolas con los colores Negro y rojo:")
+for consola in consolas_sobremesa:
+    if consola.filtrar_colores("Negro", "Rojo") == True:
+        print(consola)

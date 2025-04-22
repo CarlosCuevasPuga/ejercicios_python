@@ -22,7 +22,9 @@ class ConsolaPortatil(Consola):
     def __str__(self) -> str:
         return super().__str__() + (
             f"Colores: {self.colores}, "
-            f"Edicion Limitada {self.edicion_limitada_str()}"
+            f"Edicion Limitada {self.edicion_limitada_str()}, "
+            f"Almacenamiento {self.almacenamiento}MB, "
+            f"Autonomia: {self.autonomia_str()}"
         )
 
     def edicion_limitada_str(self) -> str:
@@ -31,10 +33,14 @@ class ConsolaPortatil(Consola):
             Edicion_limitada = "Si"
         return Edicion_limitada
 
-    def clasificar_autonomia(self) -> str:
-        if self.autonomia < 50:
-            return "bajo"
-        elif self.autonomia < 150:
-            return "medio"
+    def autonomia_str(self) -> str:
+        if self.autonomia < 4:
+            autonomia = "baja"
+        elif self.autonomia < 6:
+            autonomia = "media"
         else:
-            return "alto"
+            autonomia = "alta"
+        return autonomia
+
+    def filtrar_por_año(self, fecha: int) -> bool:
+        return fecha == self.fecha_salida.year

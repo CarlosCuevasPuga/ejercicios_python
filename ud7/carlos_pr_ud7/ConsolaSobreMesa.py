@@ -30,3 +30,6 @@ class ConsolaSobreMesa(Consola):
         if Edicion_limitada == True:
             Edicion_limitada = "Si"
         return Edicion_limitada
+
+    def filtrar_colores(self, color1: str, color2: str):
+        return color1 in self.colores and color2 in self.colores
