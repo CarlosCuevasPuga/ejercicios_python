@@ -33,7 +33,17 @@ class Tienda:
     def mostrar(self, pos) -> object:
         pos = abs(pos)
         consola_a_mostrar = self.coleccion_consolas[pos-1]
-        return consola_a_mostrar
+        # Muestro solo los atributos que comparten las 2 listas
+        fecha = consola_a_mostrar.fecha_salida.strftime("%d/%m/%Y")
+        return(
+            "\nDatos de la consola:\n"
+            f"[1]] Nombre: {consola_a_mostrar.nombre}\n"
+            f"[2] Desarrollador/es: {consola_a_mostrar.desarrollador}\n"
+            f"[3] Fecha de lanzamiento: {fecha}\n"
+            f"[4] Colores: {consola_a_mostrar.colores}\n"
+            f"[5] Edicion Limitada: {consola_a_mostrar.edicion_limitada}\n"
+            f"[6] Almacenamiento: {consola_a_mostrar.almacenamiento}"
+        )
 
     def consola_seleccionada_a_borrar(self, pos) -> object:
         pos = abs(pos)

@@ -56,7 +56,7 @@ while True:
         elif opcion_tipo_consola == 2:
             nuevo_nombre = input("Inserta el nuevo nombre: ")
             nuevo_desarrollador = input("Inserta su desarrollador/es (si tiene mas de 1 separalos por coma): ").split(",")
-            nuevo_fecha = datetime(input("Inserta su fecha de lanzamiento (ejemplo: 2022,2,25): "))
+            nuevo_fecha = input("Inserta su fecha de lanzamiento (ejemplo: 2022,2,25): ")
             nuevo_colores = input("Inserta los colores de la consola (si tiene mas de 1 separalos por comas): ").split(",")
             nuevo_exclusivo = input("Inserta si la consola es exclusiva (Si o No):" )
             nuevo_almacenamiento = int(input("Inserta la cantidad de almacenamiento que tiene (MB): "))
@@ -76,14 +76,7 @@ while True:
         num_consola = int(opcion_menu)
         if num_consola > 0:
             consola_a_mostrar = coleccion_consolas.mostrar(num_consola)
-            # Muestro solo los atributos que comparten las 2 listas
-            print("\nDatos de la consola:")
-            print(f"[1]] Nombre: {consola_a_mostrar.nombre}")
-            print(f"[2] Desarrollador/es: {consola_a_mostrar.desarrollador}")
-            print(f"[3] Fecha de lanzamiento: {consola_a_mostrar.fecha_salida}")
-            print(f"[4] Colores: {consola_a_mostrar.colores}")
-            print(f"[5] Edicion Limitada: {consola_a_mostrar.edicion_limitada}")
-            print(f"[6] Almacenamiento: {consola_a_mostrar.almacenamiento}")
+            print(consola_a_mostrar)
             input()
 
         elif num_consola < 0:
