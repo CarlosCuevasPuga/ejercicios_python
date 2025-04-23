@@ -21,13 +21,13 @@ consolas_portatiles = [
     ConsolaPortatil("Atari Mini Handheld", ["Atari"], datetime(2020, 5, 5), ["Negro", "Naranja"], False, 64, 7)
 ]
 
-coleccion_consolas = Tienda()
-for consola in consolas_sobremesa:
-    coleccion_consolas.meter_consolas_sobremesa(consola)
-for consola in consolas_portatiles:
-    coleccion_consolas.meter_consolas_portatil(consola)
-
 while True:
+
+    coleccion_consolas = Tienda()
+    for consola in consolas_sobremesa:
+        coleccion_consolas.meter_consolas_sobremesa(consola)
+    for consola in consolas_portatiles:
+        coleccion_consolas.meter_consolas_portatil(consola)
 
     print(coleccion_consolas)
 
@@ -44,30 +44,25 @@ while True:
         opcion_tipo_consola = int(input("¿La consola nueva es de Sobremesa (1) o Portatil (2)? "))
         if opcion_tipo_consola == 1:
             nuevo_nombre = input("Inserta el nuevo nombre: ")
-            nuevo_desarrollador = list(input("Inserta su desarrollador/es (si tiene mas de 1 separalos por coma): "))
-            
-            try:
-                nuevo_fecha = datetime(input("Inserta su fecha de lanzamiento (ejemplo: 2022, 2, 25): "))
-            except Exception as error:
-                print(f"Ha ocurrido un error: {error}")
-
-            nuevo_colores = list(input("Inserta los colores de la consola (si tiene mas de 1 separalos por comas): "))
+            nuevo_desarrollador = input("Inserta su desarrollador/es (si tiene mas de 1 separalos por coma): ").split(",")
+            nuevo_fecha = datetime(input("Inserta su fecha de lanzamiento (ejemplo: 2022, 2, 25): "))
+            nuevo_colores = input("Inserta los colores de la consola (si tiene mas de 1 separalos por comas): ").split(",")
             nuevo_edicion_limitada = input("Inserta si la consola es exclusiva (Si o No):" )
             nuevo_almacenamiento = int(input("Inserta la cantidad de almacenamiento que tiene (MB): "))
             nuevo_num_usb = int(input("Inserta su número de USB: "))
+
+            consolas_sobremesa.append(ConsolaSobreMesa(nuevo_nombre, nuevo_desarrollador, nuevo_fecha, nuevo_colores, nuevo_edicion_limitada, nuevo_almacenamiento, nuevo_num_usb))
+        
         elif opcion_tipo_consola == 2:
             nuevo_nombre = input("Inserta el nuevo nombre: ")
-            nuevo_desarrollador = list(input("Inserta su desarrollador/es (si tiene mas de 1 separalos por coma): "))
-            
-            try:
-                nuevo_fecha = datetime(input("Inserta su fecha de lanzamiento (ejemplo: 2022, 2, 25): "))
-            except Exception as error:
-                print(f"Ha ocurrido un error: {error}")
-
-            nuevo_colores = list(input("Inserta los colores de la consola (si tiene mas de 1 separalos por comas): "))
+            nuevo_desarrollador = input("Inserta su desarrollador/es (si tiene mas de 1 separalos por coma): ").split(",")
+            nuevo_fecha = datetime(input("Inserta su fecha de lanzamiento (ejemplo: 2022,2,25): "))
+            nuevo_colores = input("Inserta los colores de la consola (si tiene mas de 1 separalos por comas): ").split(",")
             nuevo_exclusivo = input("Inserta si la consola es exclusiva (Si o No):" )
             nuevo_almacenamiento = int(input("Inserta la cantidad de almacenamiento que tiene (MB): "))
             nuevo_autonomia = int(input("Inserta su autonomia (horas): "))
+
+            consolas_portatiles.append(ConsolaPortatil(nuevo_nombre, nuevo_desarrollador, nuevo_fecha, nuevo_colores, nuevo_exclusivo, nuevo_almacenamiento, nuevo_autonomia))
 
     elif opcion_menu == "O":
         print("\n## Consolas ordenadas por fecha de salida:")
@@ -79,14 +74,20 @@ while True:
 
     else:
         num_consola = int(opcion_menu)
-        
         if num_consola > 0:
             consola_a_mostrar = coleccion_consolas.mostrar(num_consola)
-            print(consola_a_mostrar)
+            # Muestro solo los atributos que comparten las 2 listas
+            print("\nDatos de la consola:")
+            print(f"[1]] Nombre: {consola_a_mostrar.nombre}")
+            print(f"[2] Desarrollador/es: {consola_a_mostrar.desarrollador}")
+            print(f"[3] Fecha de lanzamiento: {consola_a_mostrar.fecha_salida}")
+            print(f"[4] Colores: {consola_a_mostrar.colores}")
+            print(f"[5] Edicion Limitada: {consola_a_mostrar.edicion_limitada}")
+            print(f"[6] Almacenamiento: {consola_a_mostrar.almacenamiento}")
             input()
 
         elif num_consola < 0:
-            consola = coleccion_consolas.consola_seleccionada(num_consola)
+            consola = coleccion_consolas.consola_seleccionada_a_borrar(num_consola)
             print(f"Va a proceder a borrar la consola: {consola.nombre} con {consola.almacenamiento} MB de memoria")
             opcion_borrar = input("¿Está Seguro (S/N)?").upper()
 

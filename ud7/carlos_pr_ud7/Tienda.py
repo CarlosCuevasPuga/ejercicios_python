@@ -32,11 +32,10 @@ class Tienda:
 
     def mostrar(self, pos) -> object:
         pos = abs(pos)
-        consola_a_mostrar = self.coleccion_consolas[pos+1]
-        for atributos in consola_a_mostrar:
-            print(atributos)
+        consola_a_mostrar = self.coleccion_consolas[pos-1]
+        return consola_a_mostrar
 
-    def consola_seleccionada(self, pos) -> object:
+    def consola_seleccionada_a_borrar(self, pos) -> object:
         pos = abs(pos)
         consola_seleccionada = self.coleccion_consolas[pos-1]
         return consola_seleccionada
@@ -49,5 +48,5 @@ class Tienda:
             for consola in self.coleccion_consolas:
                 if consola.fecha_salida == fecha:
                     fechas_ordenadas.append(consola)
-
+        fechas_ordenadas.reverse()
         return fechas_ordenadas
